@@ -187,7 +187,9 @@ public class BillingSystem {
 		int tempItemID=scan.nextInt();
 		for(Bill_list bills:billList)
 		{
-			
+			//all the item line in the bill like
+			//id   name  price   quantity    total price
+			// 1  munch  5        10         50
 			for(Bill_Line_Details billLine:bills.billItemLines)
 			{
 				if(billLine.billItemId==tempItemID)
@@ -197,9 +199,6 @@ public class BillingSystem {
 					System.out.println("                 Date:"+java.time.LocalDate.now()+"    ");
 					System.out.println("                 Customer Name:"+bills.billCustomername+"        ");
 					System.out.println("Item id     Item name    Item price  Item quentity    Item amount");
-					//all the item line in the bill like
-					//id   name  price   quantity    total price
-					// 1  munch  5        10         50
 					display(bills.billItemLines);
 					System.out.println("--------------------------------------------------------------------------------------");
 				}
