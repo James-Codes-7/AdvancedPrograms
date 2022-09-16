@@ -17,13 +17,13 @@ public class Mail {
 	public static void main(String[] args) {
 
 		//it store the list of the user sent the mails to other
-		ArrayList<MailSyatem> userSentMails= new ArrayList<>();
+		ArrayList<MailSystem> userSentMails= new ArrayList<>();
 		//it store the list of the user received from other
-		ArrayList<MailSyatem> userReceivedMails= new ArrayList<>();
+		ArrayList<MailSystem> userReceivedMails= new ArrayList<>();
 		//it is delete list of the user sent the mails to others
-		ArrayList<MailSyatem> userDeletesentMails= new ArrayList<>();
+		ArrayList<MailSystem> userDeletesentMails= new ArrayList<>();
 		//it  is delete list of the user received from other
-		ArrayList<MailSyatem> userDeletereceiveMails=new ArrayList<>();
+		ArrayList<MailSystem> userDeletereceiveMails=new ArrayList<>();
 
 		//it just sample store
 		account.put("jack123@gmail.com", "Jack123");
@@ -79,9 +79,9 @@ public class Mail {
 		System.out.println("Your Account is created");
 
 	}
-	public static void login(HashMap<String,String> account,ArrayList<MailSyatem> userSentMails
-			,ArrayList<MailSyatem> userReceivedMails,ArrayList<MailSyatem> userDeletesentMails,
-			ArrayList<MailSyatem> userDeletereceiveMails)
+	public static void login(HashMap<String,String> account,ArrayList<MailSystem> userSentMails
+			,ArrayList<MailSystem> userReceivedMails,ArrayList<MailSystem> userDeletesentMails,
+			ArrayList<MailSystem> userDeletereceiveMails)
 	{
 		 iterate=true;
 		String userMailId="";
@@ -144,8 +144,8 @@ public class Mail {
 		}
 
 	}
-	public static void compose(ArrayList<MailSyatem> userSentMails,
-			ArrayList<MailSyatem> userReceivedMails,String userName)
+	public static void compose(ArrayList<MailSystem> userSentMails,
+			ArrayList<MailSystem> userReceivedMails,String userName)
 	{
 		System.out.println("Enter the opposite userId");
 		String oppositeUser=null;
@@ -164,19 +164,19 @@ public class Mail {
 		System.out.println("Enter the subject");
 		String subject=scan.nextLine();
 		//it add the mail in sent list for one user who sent
-		userSentMails.add(new MailSyatem(userName,mailId,userName,oppositeUser,subject,"send"));
+		userSentMails.add(new MailSystem(userName,mailId,userName,oppositeUser,subject,"send"));
 		//it add the mail in receive list who receive the mail 
-		userReceivedMails.add(new MailSyatem(oppositeUser,mailId,userName,oppositeUser,subject,
+		userReceivedMails.add(new MailSystem(oppositeUser,mailId,userName,oppositeUser,subject,
 				"received"));
 		mailId++;
 
 	}
-	public static  void listSentmail(ArrayList<MailSyatem> userSentMails,String userName)
+	public static  void listSentmail(ArrayList<MailSystem> userSentMails,String userName)
 	{
 		System.out.println("User name:"+userName);
 		System.out.println("Password:"+account.get(userName));
 		//it show the list of sent mail without delete mails
-		for(MailSyatem sentmails:userSentMails)
+		for(MailSystem sentmails:userSentMails)
 		{
 			if(sentmails.userId.equals(userName)&&!sentmails.touser.equals(removed))
 			{
@@ -184,13 +184,13 @@ public class Mail {
 			}
 		}
 	}
-	public static void receivedMails(ArrayList<MailSyatem> userReceivedMails,String userName)
+	public static void receivedMails(ArrayList<MailSystem> userReceivedMails,String userName)
 	{
 		System.out.println("User name:"+userName);
 		System.out.println("Password:"+account.get(userName));
 		System.out.println();
 		//it show the receive mails without delete mails
-		for(MailSyatem mails:userReceivedMails)
+		for(MailSystem mails:userReceivedMails)
 		{                                     //it mail delete i give remove in touser variable
 			if(mails.userId.equals(userName)&&!mails.touser.equals(removed))
 			{
@@ -198,18 +198,18 @@ public class Mail {
 			}
 		}
 	}
-	public static void deleteSentMail(ArrayList<MailSyatem> userSentMails,
-			ArrayList<MailSyatem> userDeletesentMails,String userName)
+	public static void deleteSentMail(ArrayList<MailSystem> userSentMails,
+			ArrayList<MailSystem> userDeletesentMails,String userName)
 	{
 		System.out.println("Enter the message id");
 		long messId=scan.nextLong();
 
 		//it delete the sent mail use of message id
-		for(MailSyatem mail:userSentMails)
+		for(MailSystem mail:userSentMails)
 		{
 			if(mail.userId.equals(userName)&&mail.messageId==messId)
 			{
-				userDeletesentMails.add(new MailSyatem(mail.userId,mail.messageId,mail.From,
+				userDeletesentMails.add(new MailSystem(mail.userId,mail.messageId,mail.From,
 						mail.to,mail.subject,mail.touser));
 				mail.touser=removed;
 				System.out.println("Your sent mail is deleted");return;
@@ -220,17 +220,17 @@ public class Mail {
 
 
 	}
-	public static void deleteReceiveMail(ArrayList<MailSyatem> userReceivedMails,ArrayList<MailSyatem> userDeletereceiveMails,
+	public static void deleteReceiveMail(ArrayList<MailSystem> userReceivedMails,ArrayList<MailSystem> userDeletereceiveMails,
 			String userName)
 	{
 		System.out.println("Enter the message Id");
 		long messId=scan.nextLong();
 		//it delete the receive mail use of message id
-		for(MailSyatem mail:userReceivedMails)
+		for(MailSystem mail:userReceivedMails)
 		{
 			if(mail.userId.equals(userName)&&mail.messageId==messId)
 			{
-				userDeletereceiveMails.add(new MailSyatem(mail.userId,mail.messageId,mail.From,
+				userDeletereceiveMails.add(new MailSystem(mail.userId,mail.messageId,mail.From,
 						mail.to,mail.subject,mail.touser));
 				mail.touser=removed;
 				System.out.println("Your received mail is deleted");return;
@@ -239,14 +239,14 @@ public class Mail {
 		System.out.println();
 		System.out.println("Cannot find this mail");
 	}
-	public static void showSentDeleteMails(ArrayList<MailSyatem> userDeletesentMails,String userName)
+	public static void showSentDeleteMails(ArrayList<MailSystem> userDeletesentMails,String userName)
 	{
 
 		System.out.println("User name:"+userName);
 		System.out.println("Password:"+account.get(userName));
 		System.out.println();
 		//it show user sent mail delete list
-		for(MailSyatem mails:userDeletesentMails)
+		for(MailSystem mails:userDeletesentMails)
 		{
 			if(mails.userId.equals(userName))
 			{
@@ -254,13 +254,13 @@ public class Mail {
 			}
 		}
 	}
-	public static void showReceiveDeleteMails(ArrayList<MailSyatem> userDeletereceiveMails,String userName)
+	public static void showReceiveDeleteMails(ArrayList<MailSystem> userDeletereceiveMails,String userName)
 	{
 		System.out.println("User Id:"+userName);
 		System.out.println("Pass word:"+account.get(userName));
 
 		//it show the user receive mail delete list
-		for(MailSyatem mails:userDeletereceiveMails)
+		for(MailSystem mails:userDeletereceiveMails)
 		{
 			if(mails.userId.equals(userName))
 			{
@@ -268,14 +268,14 @@ public class Mail {
 			}
 		}
 	}
-	private static void display(MailSyatem mails)
+	private static void display(MailSystem mails)
 	{
 		System.out.println("Message Id:"+mails.messageId+", From:"+mails.From+", To:"+mails.to+" subject:"+mails.subject);
 	}
 
 
 }
-class MailSyatem
+class MailSystem
 {
 	public String userId;
 	public long messageId;
@@ -284,7 +284,7 @@ class MailSyatem
 	public String subject;
 	public String touser;
 
-	public MailSyatem(String userID,long messageId,String from,String to,String subject,String toUser)
+	public MailSystem(String userID,long messageId,String from,String to,String subject,String toUser)
 	{   
 		this.userId=userID;
 		this.messageId=messageId;
